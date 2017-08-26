@@ -10,7 +10,6 @@
 "                                 ||----w |
 "                                 ||     ||
 
-" Source: https://github.com/chxuan/vimplus
 " genernal settings
 syntax enable
 syntax on
