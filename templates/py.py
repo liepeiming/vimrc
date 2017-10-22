@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python2
+# -*- coding: UTF-8 -*-
 #coding:utf-8
 
 def main() :
@@ -6,3 +7,4 @@ def main() :
 
 if __name__ == '__main__' :
     main()
+
