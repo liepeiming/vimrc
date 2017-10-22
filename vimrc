@@ -143,7 +143,7 @@ set hlsearch
 " 开启实时搜索功能
 set incsearch
 " 搜索时大小写不敏感
-set ignorecase
+"set ignorecase
 " 设置魔术
 set magic                   
 
