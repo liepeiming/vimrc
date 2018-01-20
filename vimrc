@@ -463,7 +463,7 @@ function! s:insertGates(var)
 endfunction
 autocmd BufNewFile *.{h,H} call s:insertGates("H")
 autocmd BufNewFile *.{hpp,HPP} call s:insertGates("HPP")
-autocmd BufNewFile *{demo,Demo,test,Test,example,Example}*.c 0r ~/.vim/templates/c.c
+autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.c 0r ~/.vim/templates/c.c
 autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.{cpp,cxx,cc} 0r ~/.vim/templates/cpp.cpp
 autocmd BufNewFile *.sh 0r ~/.vim/templates/sh.sh
 autocmd BufNewFile *.py 0r ~/.vim/templates/py.py
