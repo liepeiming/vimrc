@@ -1,16 +1,4 @@
 "
-"                       __   _(_)_ __ ___  _ __ ___
-"                       \ \ / / | '_ ` _ \| '__/ __|
-"                        \ V /| | | | | | | | | (__
-"                       (_)_/ |_|_| |_| |_|_|  \___|
-"
-"                             ^__^
-"                          o  (oo)\_______
-"                             (__)\       )\/\
-"                                 ||----w |
-"                                 ||     ||
-
-"
 "             __                __          
 "     __   __/_/___ ___  ____  / /_  _______
 "     \ \ / / / __ `__ \/ __ \/ / / / / ___/
@@ -19,7 +7,8 @@
 "                    /_/
 "            
 "
-" git clone https://github.com/chxuan/vimplus.git
+" Author: chxuan <787280310@qq.com>
+" Source: https://github.com/chxuan/vimplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
@@ -39,22 +28,9 @@ set noeb
 " 告诉我们文件的哪一行被改变过
 set report=0
 " 可以在buffer的任何地方使用鼠标
-"set mouse=a
-"set selection=exclusive
-"set selectmode=mouse,key
-
-"vim记住上次编辑和浏览位置
-"remember last update or view postion"
- " Only do this part when compiled with support for autocommands 
- if has("autocmd")
- " In text files, always limit the width of text to 78 characters 
- autocmd BufRead *.txt set tw=78
- " When editing a file, always jump to the last cursor position 
- autocmd BufReadPost *
- \ if line("'\"") > 0 && line ("'\"") <= line("$") |
- \ exe "normal g'\"" |
- \ endif 
- endif
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示设置
@@ -103,7 +79,7 @@ set scrolloff=3
 " 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
 " 允许backspace和光标键跨越行边界
-"set whichwrap+=<,>,h,l
+set whichwrap+=<,>,h,l
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
@@ -143,7 +119,7 @@ set hlsearch
 " 开启实时搜索功能
 set incsearch
 " 搜索时大小写不敏感
-"set ignorecase
+set ignorecase
 " 设置魔术
 set magic                   
 
@@ -188,10 +164,35 @@ set termencoding=utf-8
 set encoding=utf8
 " 使用utf-8或gbk打开文件
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-set fileformat=unix
-set fileformats=unix,dos,mac
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 新建文件设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
+func SetTitle() 
+	if expand("%:e") == 'sh'
+		call setline(1,"\#!/bin/bash") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'py'
+        call setline(1,"#!/usr/bin/env python")
+        call append(line("."),"# coding=utf-8")
+	    call append(line(".")+1, "") 
+    elseif expand("%:e") == 'cpp'
+		call setline(1,"#include <iostream>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'cc'
+		call setline(1,"#include <iostream>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'c'
+		call setline(1,"#include <stdio.h>") 
+		call append(line("."), "") 
+    elseif expand("%:e") == 'h'
+		call setline(1, "#pragma once")
+    elseif expand("%:e") == 'hpp'
+		call setline(1, "#pragma once")
+	endif
+endfunc 
+autocmd BufNewFile * normal G
 
 " Vundle
 filetype off        
@@ -234,6 +235,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'will133/vim-dirdiff'
 Plugin 'mhinz/vim-startify'
+Plugin 'junegunn/vim-slash'
 Plugin 'kien/rainbow_parentheses.vim'
 
 call vundle#end()            
@@ -249,8 +251,10 @@ map <F9> :PreviousColorScheme<CR>
 imap <F9> <ESC> :PreviousColorScheme<CR>
 
 " nerdtree
-map <F3> :NERDTreeToggle<CR>
-imap <F3> <ESC> :NERDTreeToggle<CR>
+" map <Leader>L <Plug>(easymotion-bd-jk)
+" nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>n :NERDTreeToggle<CR>
+imap <Leader>n <ESC> :NERDTreeToggle<CR>
 "autocmd vimenter * if !argc() | NERDTree | endif
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -299,13 +303,16 @@ let g:ycm_semantic_triggers =  {
 let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&',']']
 
 " a.vim: .h -> .cpp or .cpp -> .h
-nnoremap <silent> <F2> :A<CR>
+nnoremap <silent> <Leader>a :A<CR>
 
 " tagbar
-let g:tagbar_ctags_bin = '/usr/bin/ctags'
+
+" 用系统默认路径
+" let g:tagbar_ctags_bin = '/usr/bin/ctags' "linux
+" let g:tagbar_ctags_bin = '/usr/local/bin/ctags' "mac
 let g:tagbar_width = 30
-map <F4> :TagbarToggle<CR>
-imap <F4> <ESC> :TagbarToggle<CR>
+map <Leader>t :TagbarToggle<CR>
+imap <Leader>t <ESC> :TagbarToggle<CR>
 
 " colorscheme
 set background=dark
@@ -325,8 +332,8 @@ let g:airline_powerline_fonts = 1
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -385,97 +392,7 @@ nmap <Leader><Leader>il :IndentLinesToggle<CR>
 let g:pydiction_location='~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height=10
 
-" RAINBOW_PARENTHESES[括号高亮]
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-" 不加入这行, 防止黑色括号出现, 很难识别
-" \ ['black',       'SeaGreen3'],
-
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" 常规模式下输入 cS 清除行尾空格
-nmap cS :%s/\s\+$//g<CR>:noh<CR>
-" 常规模式下输入 cM 清除行尾 ^M 符号
-nmap cM :%s/\r$//g<CR>:noh<CR>
-
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" 个性化
+if filereadable(expand($HOME . '/.vimrc.local'))
+    source $HOME/.vimrc.local
 endif
-" eggcache vim
-nnoremap ; :
-:command W w
-:command WQ wq
-:command Wq wq
-:command Q q
-:command Qa qa
-:command QA qa
-
-set autoread           " 当文件在外部被修改，自动更新该文件
-set writebackup        "保存文件前建立备份，保存成功后删除该备份
-set nobackup           "设置无备份文件
-set noswapfile         "设置无临时文件
-
-" --------------- new files template begin ---------------------
-function! s:insertGates(var)
-	let h_or_hpp = a:var
-	let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-	execute "normal! i#ifndef __" . gatename . h_or_hpp[3] . "__"
-	execute "normal! o#define __" . gatename . h_or_hpp[3] . "__"
-"    if h_or_hpp == "H"
-"        execute "normal! o#ifdef __cplusplus"
-"        execute "normal! oextern \"C\" {"
-"        execute "normal! o#endif // __cplusplus"
-"    endif
-	execute "normal! o"
-	execute "normal! o"
-"    if h_or_hpp == "H"
-"        execute "normal! o#ifdef __cplusplus"
-"        execute "normal! o}"
-"        execute "normal! o#endif // __cplusplus"
-"    endif
-	execute "normal! Go#endif // __" . gatename . h_or_hpp[3] . "__"
-	execute "normal! o"
-"    if h_or_hpp == "H"
-"        execute "normal! kkk"
-"    endif
-    execute "normal! kkk"
-endfunction
-autocmd BufNewFile *.{h,H} call s:insertGates("H")
-autocmd BufNewFile *.{hpp,HPP} call s:insertGates("HPP")
-autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.c 0r ~/.vim/templates/c.c
-autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.{cpp,cxx,cc} 0r ~/.vim/templates/cpp.cpp
-autocmd BufNewFile *.sh 0r ~/.vim/templates/sh.sh
-autocmd BufNewFile *.py 0r ~/.vim/templates/py.py
-autocmd BufNewFile *.php 0r ~/.vim/templates/php.php
-autocmd BufNewFile *.{htm,html} 0r ~/.vim/templates/html.html
-autocmd BufNewFile *.lua 0r ~/.vim/templates/lua.lua
-autocmd BufNewFile *.vertex.glsl 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile *.vs 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile *.frag.glsl 0r ~/.vim/templates/fragment.glsl
-autocmd BufNewFile *.fragment.glsl 0r ~/.vim/templates/fragment.glsl
-autocmd BufNewFile *.fs 0r ~/.vim/templates/fragment.glsl
-autocmd BufNewFile {m,M}akefile 0r ~/.vim/templates/Makefile
-" ----------------new files template end -----------------------
-
-
