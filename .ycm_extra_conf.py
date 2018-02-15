@@ -77,7 +77,6 @@ flags = [
 '-isystem',
 '/usr/include',
 
-
 '-isystem',
 '/usr/include/boost',
 '-isystem',
@@ -86,9 +85,9 @@ flags = [
 '/usr/include/opencv',
 '-isystem',
 '/usr/include/opencv2',
-
 '-isystem',
 '/usr/local/include',
+
 '-isystem',
 '/usr/include/GLES2',
 '-isystem',
@@ -109,6 +108,8 @@ flags = [
 '/usr/include/SOIL',
 '-isystem',
 '/usr/include/assimp',
+'-isystem',
+'/usr/include/event2',
 
 #'-isystem',
 #'../BoostParts',

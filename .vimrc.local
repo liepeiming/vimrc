@@ -29,6 +29,7 @@ imap [] []<Left>
 imap {} {}<Left>
 imap "" ""<Left>
 imap " "<Left>
+imap <> <><Left>
 
 "vim记住上次编辑和浏览位置
 "remember last update or view postion"
