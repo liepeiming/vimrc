@@ -29,4 +29,5 @@ git clone https://github.com/vim/vim.git
 make
 sudo make install
 
+sudo ln -s /opt/vim8/bin/vim /usr/local/bin/vim
 
