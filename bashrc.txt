@@ -1,0 +1,12 @@
+# alias
+alias cls='clear'
+alias yum='sudo yum -y '
+alias apt='sudo yum -y '
+alias apt-get='sudo yum -y '
+alias systemctl='sudo systemctl '
+alias firewall-cmd='sudo firewall-cmd '
+alias ldconfig='sudo ldconfig'
+alias l='ls'
+alias ll='ls -la'
+alias g++='g++ -g -Wall -std=c++17 '
+alias gcc='gcc -g -Wall '

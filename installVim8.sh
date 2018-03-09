@@ -1,16 +1,16 @@
 #!/bin/bash
 
-sudo yum upgrade
-sudo yum update
-sudo yum install git-core wget unzip 
+#sudo yum upgrade
+#sudo yum update
+#sudo yum install git-core wget unzip 
 
-sudo yum install centos-release-scl
-sudo yum install devtoolset-3-toolchain
-sudo yum install gcc gcc-c++
-sudo scl enable devtoolset-3 bash
-sudo ldconfig
+#sudo yum install centos-release-scl
+#sudo yum install devtoolset-3-toolchain
+#sudo yum install gcc gcc-c++
+#sudo scl enable devtoolset-3 bash
+#sudo ldconfig
 
-yum install ncurses-devel ctags automake cmake cmake-gui gmake
+#yum install ncurses-devel ctags automake cmake cmake-gui gmake
 
 
 yum install perl perl-devel #让vim支持perl解释器
@@ -22,12 +22,13 @@ yum install python python36 python-devel python36-devel #让vim支持python解�
 sudo ldconfig
 
 
-cd ~/Downloads
+cd /home/ming/Downloads
 git clone https://github.com/vim/vim.git
+cd /home/ming/Downloads/vim/
 
 ./configure --prefix=/opt/vim8 --enable-fail-if-missing -enable-pythoninterp   --enable-python3interp --enable-multibyte --enable-fontset --with-features=huge   --with-python3-config-dir=/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu --with-python-config-dir=/usr/lib64/python2.7/config  --enable-perlinterp  --enable-rubyinterp  --enable-luainterp  --with-lua-prefix=$LUA_PREFIX  --enable-sniff  --enable-fontset --enable-cscope  --disable-gui
 make
 sudo make install
 
-sudo ln -s /opt/vim8/bin/vim /usr/local/bin/vim
+#sudo ln -s /opt/vim8/bin/vim /usr/local/bin/vim
 
