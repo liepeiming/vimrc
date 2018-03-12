@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#sudo yum upgrade
-#sudo yum update
-#sudo yum install git-core wget unzip 
+sudo yum upgrade
+sudo yum update
+sudo yum install git-core wget unzip 
 
-#sudo yum install centos-release-scl
-#sudo yum install devtoolset-3-toolchain
-#sudo yum install gcc gcc-c++
-#sudo scl enable devtoolset-3 bash
-#sudo ldconfig
+sudo yum install centos-release-scl
+sudo yum install devtoolset-3-toolchain
+sudo yum install gcc gcc-c++
+sudo scl enable devtoolset-3 bash
+sudo ldconfig
 
-#yum install ncurses-devel ctags automake cmake cmake-gui gmake
+yum install ncurses-devel ctags automake cmake cmake-gui gmake
 
 
 yum install perl perl-devel #让vim支持perl解释器
