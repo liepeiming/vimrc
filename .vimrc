@@ -1,4 +1,3 @@
-"
 "             __                __          
 "     __   __/_/___ ___  ____  / /_  _______
 "     \ \ / / / __ `__ \/ __ \/ / / / / ___/
@@ -6,8 +5,6 @@
 "       \_/_/_/ /_/ /_/ ,___/_/\____/____/
 "                    /_/
 "            
-"
-" Author: chxuan <787280310@qq.com>
 " Source: https://github.com/chxuan/vimplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,7 +38,8 @@ endif
 "imap {} {}<Left>
 "imap "" ""<Left>
 "imap " "<Left>
-"imap <> <><Left>
+imap <> <><Left>
+
 
 "vim记住上次编辑和浏览位置
 "remember last update or view postion"
@@ -255,16 +253,6 @@ map <Leader>n :NERDTreeToggle<CR>
 imap <Leader>n <ESC> :NERDTreeToggle<CR>
 "autocmd vimenter * if !argc() | NERDTree | endif
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Doxygen
-"let g:DoxygenToolkit_authorName="chxuan, 787280310@qq.com"
-"let s:licenseTag = "Copyright(C)\<enter>"
-"let s:licenseTag = s:licenseTag . "For free\<enter>"
-"let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
-"let g:DoxygenToolkit_licenseTag = s:licenseTag
-"let g:DoxygenToolkit_briefTag_funcName="yes"
-"let g:doxygen_enhanced_color=1
-"let g:DoxygenToolkit_commentType="Qt"
 
 " YCM
 let g:ycm_confirm_extra_conf = 0 
