@@ -96,24 +96,29 @@ function install_prepare_software_on_archlinux()
 function copy_files()
 {
     rm -rf ~/.vimrc
-    # cp .vimrc ~
-    ln -s ${PWD}/.vimrc ~
+    cp .vimrc ~
+    #ln -s ${PWD}/.vimrc ~
 
     rm -rf ~/.vimrc.local
-    cp ${PWD}/.vimrc.local ~
+    cp .vimrc.local ~
+    #ln -s ${PWD}/.vimrc.local ~
 
     rm -rf ~/.ycm_extra_conf.py
-    # cp .ycm_extra_conf.py ~
-    ln -s ${PWD}/.ycm_extra_conf.py ~
+    cp .ycm_extra_conf.py ~
+    #ln -s ${PWD}/.ycm_extra_conf.py ~
 
     mkdir ~/.vim
     rm -rf ~/.vim/plugin
-    # cp -R ./plugin ~/.vim
-    ln -s ${PWD}/plugin ~/.vim
+    cp -R ./plugin ~/.vim
+    #ln -s ${PWD}/plugin ~/.vim
 
     rm -rf ~/.vim/colors
-    # cp -R ./colors ~/.vim
-    ln -s ${PWD}/colors ~/.vim
+    cp -R ./colors ~/.vim
+    #ln -s ${PWD}/colors ~/.vim
+
+    rm -rf ~/.vim/templates
+    cp -R ./templates ~/.vim
+    #ln -s ${PWD}/templates ~/.vim
 }
 
 # 安装mac平台字体
