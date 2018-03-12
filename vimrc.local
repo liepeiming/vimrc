@@ -3,7 +3,7 @@
 "## settings
 
 "### 开启相对行号
-"set relativenumber
+set relativenumber
 
 "### open firefox for markdown-preview in macOS
 "let g:mkdp_path_to_chrome = 'open -a /Applications/Firefox.app'
