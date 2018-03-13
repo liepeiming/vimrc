@@ -63,7 +63,7 @@ MY_CFLAGS = -g -Wall -O3
 CPPFLAGS  = -g -Wall -O3
 
 # The linker options.
-MY_LIBS   = -ldl -lpthread   -lGL -lGLEW -lglut -lglfw -lSOIL -lglm
+MY_LIBS   = -ldl -lpthread 
 
 # The options used in linking as well as in any direct use of ld.
 LDFLAGS   =

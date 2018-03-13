@@ -473,9 +473,17 @@ map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
-        exec "!(gcc -g -Wall % -o a.out) && (echo '---------------------Debug Output ... -------------------------') && (time ./a.out) && (echo '---------------------- E.N.D ----------------------------------')"
+        if filereadable(expand('./Makefile'))
+            exec "!(make) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+        else
+            exec "!(gcc -g -Wall % -o a.out) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+        endif
     elseif &filetype == 'cpp'
-        exec "!(g++ -g -Wall -std=c++17 % -o a.out) && (echo '---------------------Debug Output ... -------------------------') && (time ./a.out) && (echo '---------------------- E.N.D ----------------------------------')"
+        if filereadable(expand('./Makefile'))
+            exec "!(make) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+        else
+            exec "!(g++ -g -Wall -std=c++17 % -o a.out) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+        endif
     elseif &filetype == 'java'
         exec "!javac %"
         exec "!time java %<"
@@ -504,3 +512,4 @@ inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 if filereadable(expand($HOME . '/.vimrc.local'))
     source $HOME/.vimrc.local
 endif
+
