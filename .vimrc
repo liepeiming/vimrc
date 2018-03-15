@@ -474,13 +474,13 @@ func! CompileRunGcc()
         if filereadable(expand('./Makefile'))
             exec "!(make)&& (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(gcc -g -Wall % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(gcc -g -Wall -Werror % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'cpp'
         if filereadable(expand('./Makefile'))
             exec "!(make) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(g++ -g -Wall -std=c++17 % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(g++ -g -Wall -Werror -std=c++17 % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'java'
         exec "!javac %"
