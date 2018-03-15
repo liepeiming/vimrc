@@ -506,8 +506,14 @@ endfunc
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 "inoremap <S-Insert><ESC>"+p`]a
 
+" normal模式下输入;分号会在行尾添加一个分号
+nmap ; mqA;<esc>`q"
+
 " 个性化
 if filereadable(expand($HOME . '/.vimrc.local'))
     source $HOME/.vimrc.local
 endif
+
+" 由于windows下编程习惯了保存就ctrl+s，在vim下ctrl+s整个putty终端就死了，
+" 遇到好几次这种情况，网上查了下原来ctrl+s在LINUX里是锁定屏幕的快捷键，解锁ctrl+q就可以了
 
