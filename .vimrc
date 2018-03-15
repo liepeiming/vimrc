@@ -25,9 +25,9 @@ set noeb
 " 告诉我们文件的哪一行被改变过
 set report=0
 " 可以在buffer的任何地方使用鼠标
-"set mouse=a
-"set selection=exclusive
-"set selectmode=mouse,key
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
 " 鼠标右键粘贴
 if has('mouse')
     set mouse-=a
@@ -37,8 +37,8 @@ endif
 "imap [] []<Left>
 "imap {} {}<Left>
 "imap "" ""<Left>
-"imap " "<Left>
-imap <> <><Left>
+"imap '' ''<Left>
+"imap <> <><Left>
 
 
 "vim记住上次编辑和浏览位置
@@ -57,6 +57,8 @@ imap <> <><Left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 由于内部表示法，Vim 处理比较长的行时会有问题。让它高亮到 3000 列
+set synmaxcol=3000
 " 开启语法高亮功能
 syntax enable
 " 允许指定语法高亮配色方案替换默认方案
@@ -416,7 +418,7 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-set autoread           " 当文件在外部被修改，自动更新该文件
+set autoread           "当文件在外部被修改，自动更新该文件
 set writebackup        "保存文件前建立备份，保存成功后删除该备份
 set nobackup           "设置无备份文件
 set noswapfile         "设置无临时文件
@@ -457,13 +459,9 @@ autocmd BufNewFile *.py 0r ~/.vim/templates/py.py
 autocmd BufNewFile *.php 0r ~/.vim/templates/php.php
 autocmd BufNewFile *.{htm,html} 0r ~/.vim/templates/html.html
 autocmd BufNewFile *.lua 0r ~/.vim/templates/lua.lua
-autocmd BufNewFile *.vertex.glsl 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile *.vs 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile *.frag.glsl 0r ~/.vim/templates/fragment.glsl
-autocmd BufNewFile *.fragment.glsl 0r ~/.vim/templates/fragment.glsl
-autocmd BufNewFile *.fs 0r ~/.vim/templates/fragment.glsl
+autocmd BufNewFile *.{vs,vert,vertex,vs.glsl,vert.glsl} 0r ~/.vim/templates/vertex.glsl
+autocmd BufNewFile *.{fs,frag,fragment,fs.glsl,frag.glsl} 0r ~/.vim/templates/vertex.glsl
 autocmd BufNewFile {m,M}akefile 0r ~/.vim/templates/Makefile
-" ----------------new files template end -----------------------
 
 " 取消自动缩进
 "set noautoindent
@@ -474,15 +472,15 @@ func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
         if filereadable(expand('./Makefile'))
-            exec "!(make) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(make)&& (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(gcc -g -Wall % -o a.out) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(gcc -g -Wall % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'cpp'
         if filereadable(expand('./Makefile'))
-            exec "!(make) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(make) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(g++ -g -Wall -std=c++17 % -o a.out) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(g++ -g -Wall -std=c++17 % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'java'
         exec "!javac %"
