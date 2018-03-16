@@ -409,11 +409,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-" 常规模式下输入 cS 清除行尾空格
-nmap cS :%s/\s\+$//g<CR>:noh<CR>
-" 常规模式下输入 cM 清除行尾 ^M 符号
-nmap cM :%s/\r$//g<CR>:noh<CR>
-
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -502,12 +497,16 @@ func! CompileRunGcc()
     endif
 endfunc
 
+" 常规模式下输入 cS 清除行尾空格
+nmap cS :%s/\s\+$//g<CR>:noh<CR>
+" 常规模式下输入 cM 清除行尾 ^M 符号
+nmap cM :%s/\r$//g<CR>:noh<CR>
 " 可以在插入模式下使用 Shift-Insert 快捷键在粘帖系统剪贴板中的内容了。
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 "inoremap <S-Insert><ESC>"+p`]a
-
 " normal模式下输入;分号会在行尾添加一个分号
 nmap ; mqA;<esc>`q"
+nmap // mq^i//<esc>`q"
 
 " 个性化
 if filereadable(expand($HOME . '/.vimrc.local'))
