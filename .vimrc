@@ -1,281 +1,269 @@
-"             __                __          
-"     __   __/_/___ ___  ____  / /_  _______
-"     \ \ / / / __ `__ \/ __ \/ / / / / ___/
-"      \ V / / / / / / / /_/ / / /_/ (__  )
-"       \_/_/_/ /_/ /_/ ,___/_/\____/____/
-"                    /_/
-"            
-" Source: https://github.com/chxuan/vimplus
+"   .  . .  .  . .  . S@t.. .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  .  . .  ..
+"    .     ..t%SXSS%:;t.X8S% .   .      .       .       .       .       .       .       .       .       .       .       .
+"      . %St8;8:X;8:8:8%8;%%:@S:    . .    . .    ....    .  .    .  .    .  .    .  .    .  .    .  .    .  .    .  ....
+"  .    8: %.;t;S;%@88:X.8X8%;8S t@@%   .  %@@t  .X88X .      .       .   %@@@@@@@@@X:  .     .       .       .       .  
+"    ..X.;X%8t8%8ttX.88;8.8%:;% ;8:SX%.   SX.8S.  St88:  .  .   .  .    ..XS.@%SSS88S@:. X@@%  . . .    .  .    .  ......
+"   . X;:;8SS888;8tt;8:8:8; t:t8S 8:Xt.  :8888: .%888:.  .SSSSSSSSSSS%:  .S888t   @@8X: .%.88  .SSt  .:SS;  .%SSSSSSSS%. 
+"    :t8 :;X8S;8.8S;8S.8.t8:%8XS.. S8.8:.S8;8;  :@;@88 . S:88 X.88@88:@t..%S.  .. X;8@: :%:;8. X%:X;. 8;.;  %S8@XXSXSS8..
+"  .t88; X;8S8888;8S8t 8S88SSStt:. @.%8St;@8X  . t .8S   S:88:%888%;8t8:..S.S@%SSS8S88t .% @;  X:.X.  88t :.t@t8@ .......
+"  8; :888XSStS;88;88X%;;tt::;;8@ ..%X88:88Xt    .S@.::. S@8% X8.@;S888X .%;88SSSS.SX.:. 8S88: @;88t. 8.S8  t;@8@88@88S..
+"  S. :tX: ;%8S8 : .::. %8t  %S 8.  @88t8 8t.  . . .@8;  8888 @@%S;t8.8S .:SX8; .:.... . S8; ..8888:..8:8@: ;St@@888.@@..
+"    :8:;888888 .; .     8%8@       .8X.@8X  .    X%8@  .t@8S X88X:%888X .@8@8t  ..  .   SX%X .X;;S@%tS8; ;..SttSXS8888S.
+"    t.8XX;;8X% XX.  .    %8X8;   . :tX8@t     .  t8X8:  %@@S X8@@:t8tXt...:%t..       . X:8X  X8@@88@888t. %88t888 888t.
+"  .    :8;S: . S@.       t8;8:: .   .;:;. . .   .%@%:   t%%; .%%;..: t. .;  :  . . .    %;8.  ;X;X%.:.: t  ;t  ;:: :t;..
+"     :%@t%8   88.  .  .  :: . ..   .   .          .   . ..  .      ..   .    .       . . ... .   . .   .        ..      
+"      .. 8888   ..      ...   . .    .   .  . .     .   ..    .  .    .        .   .   . ..    .  .  .   .  . .     ....
+"
+" Author: chxuan <787280310@qq.com>
+" Repository: https://github.com/chxuan/vimplus
+" Create Date: 2016-04-10
+" License: MIT
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 定义快捷键的前缀，即<Leader>
-let mapleader = ","
-" 开启文件类型侦测
-filetype on
-" 根据侦测到的不同类型加载对应的插件
-filetype plugin on
-" 不让vim发出讨厌的滴滴声
-set noerrorbells
-" 不要使用vi的键盘模式，使用vim自己的
-set nocompatible
-" 去掉输入错误的提示
-set noeb
-" 告诉我们文件的哪一行被改变过
-set report=0
-" 可以在buffer的任何地方使用鼠标
-set mouse=a
-set selection=exclusive
-set selectmode=mouse,key
-" 鼠标右键粘贴
-if has('mouse')
-    set mouse-=a
-endif
-" 输入配括号或引号文本光标自移括号或引号间便用户输入包含括号或引号间内容
-"imap () ()<Left>
-"imap [] []<Left>
-"imap {} {}<Left>
-"imap "" ""<Left>
-"imap '' ''<Left>
-"imap <> <><Left>
-
-
-"vim记住上次编辑和浏览位置
-"remember last update or view postion"
- " Only do this part when compiled with support for autocommands 
- if has("autocmd")
- " In text files, always limit the width of text to 78 characters 
- autocmd BufRead *.txt set tw=78
- " When editing a file, always jump to the last cursor position 
- autocmd BufReadPost *
- \ if line("'\"") > 0 && line ("'\"") <= line("$") |
- \ exe "normal g'\"" |
- \ endif 
- endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 由于内部表示法，Vim 处理比较长的行时会有问题。让它高亮到 3000 列
-set synmaxcol=3000
-" 开启语法高亮功能
-syntax enable
-" 允许指定语法高亮配色方案替换默认方案
-syntax on
-" 开启256色支持，默认是8色
-set t_Co=256
-" 命令行显示输入的命令
-set showcmd         
-" 命令行的高度
-set cmdheight=2
-" 命令行显示vim当前模式
-set showmode
-" 总是显示状态栏
-set laststatus=2
-" 开启行号显示
-set number
-" 显示光标当前位置
-set ruler           
-" 高亮显示当前行/列
-set cursorline
-" set cursorcolumn
-" 用浅色高亮当前行
-autocmd InsertEnter * se cul    
-" 禁止显示菜单和工具条
-set guioptions-=T           
-set guioptions-=m           
-" 禁止显示滚动条
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
-" 字符间插入的像素行数目
-set linespace=0
-" 在被分割的窗口间显示空白，便于阅读
-set fillchars=vert:\ ,stl:\ ,stlnc:\
-" 高亮显示匹配的括号
-set showmatch
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-" 光标移动到buffer的顶部和底部时保持3行的距离
-set scrolloff=3
-" 带有如下符号的单词不要被换行分割
-set iskeyword+=_,$,@,%,#,-
-" 允许backspace和光标键跨越行边界
-"set whichwrap+=<,>,h,l
+let mapleader = ","      " 定义<leader>键
+set nocompatible         " 设置不兼容原始vi模式
+filetype on              " 设置开启文件类型侦测
+filetype plugin on       " 设置加载对应文件类型的插件
+set noeb                 " 关闭错误的提示
+syntax enable            " 开启语法高亮功能
+syntax on                " 自动语法高亮
+set t_Co=256             " 开启256色支持
+set cmdheight=2          " 设置命令行的高度
+set showcmd              " select模式下显示选中的行数
+set ruler                " 总是显示光标位置
+set laststatus=2         " 总是显示状态栏
+set number               " 开启行号显示
+set cursorline           " 高亮显示当前行
+"set whichwrap+=<,>,h,l   " 设置光标键跨行
+set ttimeoutlen=0        " 设置<ESC>键响应时间
+"set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 设置自动缩进
-set autoindent
-" 设置使用C/C++语言的自动缩进方式
-set cindent
-" 设置C/C++语言的具体缩进方式
-set cinoptions=g0,:0,N-s,(0
-" 智能的选择对其方式
-set smartindent
-" 自适应不同语言的智能缩进
-filetype indent on
-" 将制表符扩展为空格
-set expandtab
-" 设置编辑时制表符占用空格数
-set tabstop=4
-" 设置格式化时制表符占用空格数
-set shiftwidth=4
-" 让vim把连续数量的空格视为一个制表符
-set softtabstop=4
-" 在行和段开始处使用制表符
-set smarttab
-" 历史文件中需要记录的行数
-set history=1000
-" 禁止折行
-set nowrap
-" 使用回格键正常处理indent,eol,start等
-set backspace=2
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 搜索设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 高亮显示搜索结果
-set hlsearch
-" 开启实时搜索功能
-set incsearch
-" 搜索时大小写不敏感
-set ignorecase
-" 设置魔术
-set magic                   
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 代码折叠
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 基于缩进或语法进行代码折叠
-" set foldmethod=indent
-"set foldmethod=syntax
-" 启动vim时关闭折叠代码
-"set nofoldenable
+set autoindent           " 设置自动缩进
+set cindent              " 设置使用C/C++语言的自动缩进方式
+set cinoptions=g0,:0,N-s,(0    " 设置C/C++语言的具体缩进方式
+set smartindent          " 智能的选择对其方式
+filetype indent on       " 自适应不同语言的智能缩进
+set expandtab            " 将制表符扩展为空格
+set tabstop=4            " 设置编辑时制表符占用空格数
+set shiftwidth=4         " 设置格式化时制表符占用空格数
+set softtabstop=4        " 设置4个空格为制表符
+set smarttab             " 在行和段开始处使用制表符
+set nowrap               " 禁止折行
+set backspace=2          " 使用回车键正常处理indent,eol,start等
+set sidescroll=10        " 设置向右滚动字符数
+set nofoldenable         " 禁用折叠代码
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim自身命名行模式智能补全
-set wildmenu
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-set completeopt-=preview
+set wildmenu             " vim自身命名行模式智能补全
+set completeopt-=preview " 补全时不显示窗口，只显示补全列表
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 搜索设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hlsearch            " 高亮显示搜索结果
+set incsearch           " 开启实时搜索功能
+set ignorecase          " 搜索时大小写不敏感
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 缓存设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 禁止生成临时文件
-set nobackup
-set noswapfile
-" 文件在vim之外修改过，自动重新读入
-set autoread
-" 设置自动保存
-set autowrite
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
+set nobackup            " 设置不备份
+set noswapfile          " 禁止生成临时文件
+set autoread            " 文件在vim之外修改过，自动重新读入
+set autowrite           " 设置自动保存
+set confirm             " 在处理未保存或只读文件的时候，弹出确认
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 编码设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set langmenu=zh_CN.UTF-8
-" 帮助系统设置为中文
 set helplang=cn
-" 设置编码格式
 set termencoding=utf-8
 set encoding=utf8
-" 使用utf-8或gbk打开文件
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-set fileformat=unix
-set fileformats=unix,dos,mac
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gvim/macvim设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+    set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete:h18 " 设置字体
+    set guioptions-=m           " 隐藏菜单栏
+    set guioptions-=T           " 隐藏工具栏
+    set guioptions-=L           " 隐藏左侧滚动条
+    set guioptions-=r           " 隐藏右侧滚动条
+    set guioptions-=b           " 隐藏底部滚动条
+    set showtabline=0           " 隐藏Tab栏
+    set guicursor=n-v-c:ver5    " 设置光标为竖线
+endif
 
-" Vundle
-filetype off        
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件列表
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" vundle 管理的插件列表必须位于vundle#begin()和vundle#end()之间
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'L9'
-"Plugin 'chxuan/change-colorscheme'
-Plugin 'Yggdroot/indentLine'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-"Plugin 'wsdjeg/FlyGrep.vim'
-Plugin 'iamcco/mathjax-support-for-mkdp'
-Plugin 'iamcco/markdown-preview.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'rkulla/pydiction'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'docunext/closetag.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-endwise'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'vim-scripts/txt.vim'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'will133/vim-dirdiff'
-Plugin 'mhinz/vim-startify'
-Plugin 'junegunn/vim-slash'
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'chxuan/cpp-mode'
+Plug 'chxuan/vim-edit'
+Plug 'chxuan/change-colorscheme'
+Plug 'chxuan/prepare-code'
+Plug 'chxuan/vim-buffer'
+Plug 'chxuan/vimplus-startify'
+Plug 'chxuan/tagbar'
+Plug 'Valloric/YouCompleteMe'
+Plug 'Yggdroot/LeaderF'
+Plug 'mileszs/ack.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/vim-slash'
+Plug 'junegunn/gv.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-function'
+Plug 'sgur/vim-textobj-parameter'
+Plug 'Shougo/echodoc.vim'
+Plug 'terryma/vim-smooth-scroll'
+Plug 'rhysd/clever-f.vim'
+Plug 'rhysd/github-complete.vim'
+Plug 'yianwillis/vimcdoc'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
-call vundle#end()            
-filetype plugin indent on    
+call plug#end()            
 
 " load vim default plugin
 runtime macros/matchit.vim
 
+" 编辑vimrc文件
+nnoremap <leader>e :edit $MYVIMRC<cr>
+
+" 查看vimplus的help文件
+nnoremap <leader>h :edit ~/.vimplus/help.md<cr>
+
+" 打开当前光标所在单词的vim帮助文档
+nnoremap <leader>H :execute ":help " . expand("<cword>")<cr>
+
+" 重新加载vimrc文件
+nnoremap <leader>s :source $MYVIMRC<cr>
+
+" 安装、更新、删除插件
+nnoremap <leader><leader>i :PlugInstall<cr>
+nnoremap <leader><leader>u :PlugUpdate<cr>
+nnoremap <leader><leader>c :PlugClean<cr>
+
+" 分屏窗口移动
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" 打开文件自动定位到最后编辑的位置
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
+
+" 主题
+set background=dark
+let g:onedark_termcolors=256
+colorscheme onedark
+
+" airline
+let g:airline_theme="onedark"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+" cpp-mode
+nnoremap <leader>y :CopyCode<cr>
+nnoremap <leader>p :PasteCode<cr>
+nnoremap <leader>U :GoToFunImpl<cr>
+nnoremap <silent> <leader>a :Switch<cr>
+nnoremap <leader><leader>fp :FormatFunParam<cr>
+nnoremap <leader><leader>if :FormatIf<cr>
+
 " change-colorscheme
-"map <F10> :NextColorScheme<CR>
-"imap <F10> <ESC> :NextColorScheme<CR>
-"map <F9> :PreviousColorScheme<CR>
-"imap <F9> <ESC> :PreviousColorScheme<CR>
+nnoremap <silent> <F9> :PreviousColorScheme<cr>
+inoremap <silent> <F9> <esc> :PreviousColorScheme<cr>
+nnoremap <silent> <F10> :NextColorScheme<cr>
+inoremap <silent> <F10> <esc> :NextColorScheme<cr>
+nnoremap <silent> <F11> :RandomColorScheme<cr>
+inoremap <silent> <F11> <esc> :RandomColorScheme<cr>
+nnoremap <silent> <F12> :ShowColorScheme<cr>
+inoremap <silent> <F12> <esc> :ShowColorScheme<cr>
+
+" prepare-code
+let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
+
+" vim-buffer
+nnoremap <silent> <c-p> :PreviousBuffer<cr>
+nnoremap <silent> <c-n> :NextBuffer<cr>
+nnoremap <silent> <leader>d :CloseBuffer<cr>
+nnoremap <silent> <leader>D :BufOnly<cr>
+
+" vim-edit
+"nnoremap Y :CopyText<cr>
+"nnoremap D :DeleteText<cr>
+"nnoremap C :ChangeText<cr>
+"nnoremap <leader>r :ReplaceTo<space>
 
 " nerdtree
-" map <Leader>L <Plug>(easymotion-bd-jk)
-" nmap <Leader>L <Plug>(easymotion-overwin-line)
-map <Leader>n :NERDTreeToggle<CR>
-imap <Leader>n <ESC> :NERDTreeToggle<CR>
-"autocmd vimenter * if !argc() | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap <silent> <leader>n :NERDTreeToggle<cr>
+inoremap <silent> <leader>n <esc> :NERDTreeToggle<cr>
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1         
+let g:NERDTreeHighlightFoldersFullName = 1 
+let g:NERDTreeDirArrowExpandable='▷'
+let g:NERDTreeDirArrowCollapsible='▼'
 
 " YCM
 let g:ycm_confirm_extra_conf = 0 
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
+let g:ycm_error_symbol = '✗'
+let g:ycm_warning_symbol = '✗'
 let g:ycm_seed_identifiers_with_syntax = 1 
 let g:ycm_complete_in_comments = 1 
 let g:ycm_complete_in_strings = 1 
-let g:ycm_global_ycm_extra_conf='/home/ming/ycm_extra_conf.py'
-"let g:ycm_cache_omnifunc = 0 
-nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>i :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>o :YcmCompleter GoToInclude<CR>
-nmap <F5> :YcmDiags<CR>
+let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:ycm_python_binary_path = 'python'
+nnoremap <leader>u :YcmCompleter GoToDeclaration<cr>
+" 已经使用cpp-mode插件提供的转到函数实现的功能
+" nnoremap <leader>i :YcmCompleter GoToDefinition<cr> 
+nnoremap <leader>o :YcmCompleter GoToInclude<cr>
+nnoremap <leader>ff :YcmCompleter FixIt<cr>
+nmap <F5> :YcmDiags<cr>
 
 " ctags
 set tags+=/usr/include/tags
 set tags+=~/.vim/systags
 set tags+=~/.vim/x86_64-linux-gnu-systags
 let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_semantic_triggers = {} 
 let g:ycm_semantic_triggers =  {
   \   'c' : ['->', '.','re![_a-zA-z0-9]'],
   \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
@@ -291,55 +279,10 @@ let g:ycm_semantic_triggers =  {
   \ }
 let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&',']']
 
-" a.vim: .h -> .cpp or .cpp -> .h
-nnoremap <silent> <Leader>a :A<CR>
-
 " tagbar
-" 用系统默认路径
-" let g:tagbar_ctags_bin = '/usr/bin/ctags' "linux
-" let g:tagbar_ctags_bin = '/usr/local/bin/ctags' "mac
 let g:tagbar_width = 30
-map <Leader>t :TagbarToggle<CR>
-imap <Leader>t <ESC> :TagbarToggle<CR>
-
-" colorscheme
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-"colorscheme monokai
-
-" cpp_class_scope_highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let c_no_curly_error = 1
-
-" airline
-let g:airline_theme="luna"
-" let g:airline_theme="badwolf"
-let g:airline_powerline_fonts = 1
-"let g:airline_section_b = '%{strftime("%c")}'
-"let g:airline_section_y = 'BN: %{bufnr("%")}'
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-nnoremap <C-N> :bn<CR>
-nnoremap <C-P> :bp<CR>
-
-" ctrlp
-let g:ctrlp_map = '<c-c>'
-let g:ctrlp_cmd = ':CtrlP'
-let g:ctrlp_working_path_mode = '0'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-" vim-devicons
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+nnoremap <silent> <leader>t :TagbarToggle<cr>
+inoremap <silent> <leader>t <esc> :TagbarToggle<cr>
 
 " incsearch.vim
 map /  <Plug>(incsearch-forward)
@@ -347,7 +290,12 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " markdown
-let g:mkdp_path_to_chrome = "firefox"
+let uname = system('uname -s')
+if uname == "Darwin\n"
+    let g:mkdp_path_to_chrome = "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+else
+    let g:mkdp_path_to_chrome = '/usr/bin/google-chrome-stable %U'
+endif
 nmap <silent> <F7> <Plug>MarkdownPreview
 imap <silent> <F7> <Plug>MarkdownPreview
 nmap <silent> <F8> <Plug>StopMarkdownPreview
@@ -355,30 +303,51 @@ imap <silent> <F8> <Plug>StopMarkdownPreview
 
 " vim-easymotion
 let g:EasyMotion_smartcase = 1
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><Leader>h <Plug>(easymotion-linebackward)
-map <Leader><Leader>l <Plug>(easymotion-lineforward)
-map <Leader><Leader>. <Plug>(easymotion-repeat)
-" <Leader>f{char} to move to {char}
-map <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-" Move to word
-map <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+map <leader>w <Plug>(easymotion-bd-w)
+nmap <leader>w <Plug>(easymotion-overwin-w)
 
-" indentLine
-let g:indentLine_enabled=0
-nmap <Leader><Leader>il :IndentLinesToggle<CR>
+" nerdtree-git-plugin
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 
-" pydiction
-let g:pydiction_location='~/.vim/bundle/pydiction/complete-dict'
-let g:pydiction_menu_height=10
+" LeaderF
+nnoremap <leader>f :LeaderfFile ~<cr>
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+let g:Lf_UseCache = 0
+
+" ack
+nnoremap <leader>F :Ack!<space>
+
+" echodoc.vim
+let g:echodoc_enable_at_startup = 1
+
+" tabular
+nnoremap <leader>l :Tab /\|<cr>
+nnoremap <leader>= :Tab /=<cr>
+
+" vim-smooth-scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" gv
+nnoremap <leader>g :GV<cr>
+nnoremap <leader>G :GV!<cr>
+nnoremap <leader>gg :GV?<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RAINBOW_PARENTHESES[括号高亮]
@@ -418,49 +387,6 @@ set writebackup        "保存文件前建立备份，保存成功后删除该�
 set nobackup           "设置无备份文件
 set noswapfile         "设置无临时文件
 
-" --------------- new files template begin ---------------------
-function! s:insertGates(var)
-	let h_or_hpp = a:var
-	let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-	execute "normal! i#ifndef __" . gatename . h_or_hpp[3] . "__"
-	execute "normal! o#define __" . gatename . h_or_hpp[3] . "__"
-"    if h_or_hpp == "H"
-"        execute "normal! o#ifdef __cplusplus"
-"        execute "normal! oextern \"C\" {"
-"        execute "normal! o#endif // __cplusplus"
-"    endif
-	execute "normal! o"
-	execute "normal! o"
-"    if h_or_hpp == "H"
-"        execute "normal! o#ifdef __cplusplus"
-"        execute "normal! o}"
-"        execute "normal! o#endif // __cplusplus"
-"    endif
-	execute "normal! Go#endif // __" . gatename . h_or_hpp[3] . "__"
-	execute "normal! o"
-"    if h_or_hpp == "H"
-"        execute "normal! kkk"
-"    endif
-    execute "normal! kkk"
-endfunction
-autocmd BufNewFile *.{h,H} call s:insertGates("H")
-autocmd BufNewFile *.{hpp,HPP} call s:insertGates("HPP")
-"autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.c 0r ~/.vim/templates/c.c
-"autocmd BufNewFile *{demo,Demo,test,Test,example,Example,main,Main,app,App,application,Application}*.{cpp,cxx,cc} 0r ~/.vim/templates/cpp.cpp
-autocmd BufNewFile *.c 0r ~/.vim/templates/c.c
-autocmd BufNewFile *.{cpp,cxx,cc} 0r ~/.vim/templates/cpp.cpp
-autocmd BufNewFile *.sh 0r ~/.vim/templates/sh.sh
-autocmd BufNewFile *.py 0r ~/.vim/templates/py.py
-autocmd BufNewFile *.php 0r ~/.vim/templates/php.php
-autocmd BufNewFile *.{htm,html} 0r ~/.vim/templates/html.html
-autocmd BufNewFile *.lua 0r ~/.vim/templates/lua.lua
-autocmd BufNewFile *.{vs,vert,vertex,vs.glsl,vert.glsl} 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile *.{fs,frag,fragment,fs.glsl,frag.glsl} 0r ~/.vim/templates/vertex.glsl
-autocmd BufNewFile {m,M}akefile 0r ~/.vim/templates/Makefile
-
-" 取消自动缩进
-"set noautoindent
-
 " F5一键编译运行c/c++/java/python等
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
@@ -469,13 +395,15 @@ func! CompileRunGcc()
         if filereadable(expand('./Makefile'))
             exec "!(make)&& (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(gcc -g -Wall -Werror % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            "exec "!(gcc -g -Wall -Werror % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(gcc -g -Wall -Werror % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'cpp'
         if filereadable(expand('./Makefile'))
             exec "!(make) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         else
-            exec "!(g++ -g -Wall -Werror -std=c++17 % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            "exec "!(g++ -g -Wall -Werror -std=c++17 % -lpthread -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
+            exec "!(g++ -g -Wall -Werror -std=c++11 % -o a.out) && (clear) && (echo '---------------------\033[32m Debug Output ... \033[0m-------------------------') && (time ./a.out) && (echo '-------------------------\033[32m E.N.D \033[0m---------------------------------')"
         endif
     elseif &filetype == 'java'
         exec "!javac %"
@@ -483,7 +411,8 @@ func! CompileRunGcc()
     elseif &filetype == 'sh'
         :!time bash %
     elseif &filetype == 'python'
-        exec "!time python2.7 %"
+        "exec "!time python2.7 %"
+        exec "!time python3 %"
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
@@ -505,14 +434,20 @@ nmap cM :%s/\r$//g<CR>:noh<CR>
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 "inoremap <S-Insert><ESC>"+p`]a
 " normal模式下输入;分号会在行尾添加一个分号
-nmap ; mqA;<esc>`q"
-nmap // mq^i//<esc>`q"
+nmap ; mqA;<esc><esc>`q"
+nmap // mq^i//<esc><esc>`q"
+nmap \\ mq^xx<esc><esc>`q"
+" 输入一对符号时使光标自动移动到两个符号中间
+"imap () ()<Left>
+"imap [] []<Left>
+"imap {} {}<Left>
+"imap "" ""<Left>
+"imap " "<Left>
+imap <> <><Left>
 
 " 个性化
 if filereadable(expand($HOME . '/.vimrc.local'))
     source $HOME/.vimrc.local
 endif
-
 " 由于windows下编程习惯了保存就ctrl+s，在vim下ctrl+s整个putty终端就死了，
 " 遇到好几次这种情况，网上查了下原来ctrl+s在LINUX里是锁定屏幕的快捷键，解锁ctrl+q就可以了
-
