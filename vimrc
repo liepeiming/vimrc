@@ -147,7 +147,6 @@ Plug 'Shougo/echodoc.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'rhysd/clever-f.vim'
 Plug 'rhysd/github-complete.vim'
-Plug 'yianwillis/vimcdoc'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'kien/rainbow_parentheses.vim'
 
@@ -227,10 +226,10 @@ nnoremap <silent> <leader>d :CloseBuffer<cr>
 nnoremap <silent> <leader>D :BufOnly<cr>
 
 " vim-edit
-"nnoremap Y :CopyText<cr>
-"nnoremap D :DeleteText<cr>
-"nnoremap C :ChangeText<cr>
-"nnoremap <leader>r :ReplaceTo<space>
+nnoremap Y :CopyText<cr>
+nnoremap D :DeleteText<cr>
+nnoremap C :ChangeText<cr>
+nnoremap <leader>r :ReplaceTo<space>
 
 " nerdtree
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
@@ -426,6 +425,19 @@ func! CompileRunGcc()
     endif
 endfunc
 
+" -----------------------------------------
+"vim记住上次编辑和浏览位置
+"remember last update or view postion"
+" Only do this part when compiled with support for autocommands 
+if has("autocmd")
+" In text files, always limit the width of text to 78 characters 
+autocmd BufRead *.txt set tw=78
+" When editing a file, always jump to the last cursor position 
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\ exe "normal g'\"" |
+\ endif
+endif
 " 常规模式下输入 cS 清除行尾空格
 nmap cS :%s/\s\+$//g<CR>:noh<CR>
 " 常规模式下输入 cM 清除行尾 ^M 符号
@@ -434,9 +446,9 @@ nmap cM :%s/\r$//g<CR>:noh<CR>
 inoremap <S-Insert><ESC>:setl paste<CR>gi<C-R>+<ESC>:setl nopaste<CR>gi
 "inoremap <S-Insert><ESC>"+p`]a
 " normal模式下输入;分号会在行尾添加一个分号
-nmap ; mqA;<esc><esc>`q"
-nmap // mq^i//<esc><esc>`q"
-nmap \\ mq^xx<esc><esc>`q"
+nmap ; mqA;<esc><esc>`q"<esc>
+nmap // mq^i//<esc><esc>`q"<esc>
+nmap \\ mq^xx<esc><esc>`q"<esc>
 " 输入一对符号时使光标自动移动到两个符号中间
 "imap () ()<Left>
 "imap [] []<Left>
@@ -449,5 +461,3 @@ imap <> <><Left>
 if filereadable(expand($HOME . '/.vimrc.local'))
     source $HOME/.vimrc.local
 endif
-" 由于windows下编程习惯了保存就ctrl+s，在vim下ctrl+s整个putty终端就死了，
-" 遇到好几次这种情况，网上查了下原来ctrl+s在LINUX里是锁定屏幕的快捷键，解锁ctrl+q就可以了

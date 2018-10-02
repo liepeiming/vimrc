@@ -80,12 +80,6 @@ flags = [
 '/usr/include/x86_64-linux-gnu',
 '-isystem',
 '/usr/local/include',
-'-isystem',
-'/usr/include/boost',
-'-isystem',
-'/usr/include/event2',
-'-isystem',
-'/usr/include/opencv2',
 ]
 
 
